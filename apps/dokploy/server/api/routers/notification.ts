@@ -535,7 +535,7 @@ export const notificationRouter = createTRPCRouter({
 					}
 
 					organizationId = result?.[0]?.organizationId;
-					ServerName = "Remote";
+					ServerName = result?.[0]?.name ?? "Remote";
 				}
 
 				await sendServerThresholdNotifications(organizationId, {
@@ -677,7 +677,10 @@ export const notificationRouter = createTRPCRouter({
 			} catch (error) {
 				throw new TRPCError({
 					code: "BAD_REQUEST",
-					message: "Error testing the notification",
+					message:
+						error instanceof Error
+							? `Error testing the notification: ${error.message}`
+							: "Error testing the notification",
 					cause: error,
 				});
 			}

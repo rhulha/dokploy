@@ -1,3 +1,7 @@
+import {
+	ADDITIONAL_FLAG_ERROR,
+	ADDITIONAL_FLAG_REGEX,
+} from "@dokploy/server/db/validations/destination";
 import { standardSchemaResolver as zodResolver } from "@hookform/resolvers/standard-schema";
 import { PenBoxIcon, PlusIcon, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -35,10 +39,6 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { api } from "@/utils/api";
-import {
-	ADDITIONAL_FLAG_ERROR,
-	ADDITIONAL_FLAG_REGEX,
-} from "@dokploy/server/db/validations/destination";
 import { S3_PROVIDERS } from "./constants";
 
 const addDestination = z.object({
@@ -434,8 +434,8 @@ export const HandleDestinations = ({ destinationId }: Props) => {
 
 					<DialogFooter
 						className={cn(
-							isCloud ? "!flex-col" : "flex-row",
-							"flex w-full  !justify-between gap-4",
+							isCloud ? "flex-col!" : "flex-row",
+							"flex w-full  justify-between! gap-4",
 						)}
 					>
 						{isCloud ? (
